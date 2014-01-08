@@ -1,0 +1,14 @@
+%form.form-inline{:role => "form", :action => "/name", :method => "post"}
+  .text-center
+    .form-group
+      %label.sr-only{:for => "inpName"} Name
+      %input#inputName.form-control{:required => "", :name => "username", :type => "text", :placeholder => "Name"}
+    %button#btncalc.btn.btn-primary{:type => "submit"} Calculate
+  
+%hr
+
+- if !@message.nil?
+  .form-group.has-success
+    .col-lg-offset-3.col-lg-6
+      .form-control.text-center
+        #{@message}
