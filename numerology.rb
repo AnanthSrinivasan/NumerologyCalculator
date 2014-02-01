@@ -41,5 +41,12 @@ def namecount username
   return val  
 end
 
-# puts "Enter Username"
-# username = gets.chomp.upcase.gsub(/\s+/, "")
+def rec_sum val
+  if val.to_s.size != 1
+    val = val.to_s.chars.map(&:to_i).reduce(:+)
+    rec_sum val
+  else
+    return val
+  end
+end
+

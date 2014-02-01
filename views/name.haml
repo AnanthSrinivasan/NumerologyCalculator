@@ -1,14 +1,31 @@
 %form.form-inline{:role => "form", :action => "/name", :method => "post"}
   .text-center
     .form-group
-      %label.sr-only{:for => "inpName"} Name
-      %input#inputName.form-control{:required => "", :name => "username", :type => "text", :placeholder => "Name"}
+      %textarea#inputName.form-control{:required => "", :name => "username", :cols => "50", :rows => "5", :placeholder => "Name/Comma Separated Names..."}
     %button#btncalc.btn.btn-primary{:type => "submit"} Calculate
   
 %hr
 
-- if !@message.nil?
-  .form-group.has-success
-    .col-lg-offset-3.col-lg-6
-      .form-control.text-center
-        #{@message}
+- if !@all_names.nil?
+  .text-center
+    = will_paginate(@all_names, :renderer => BootstrapPagination::Sinatra, :bootstrap => 3)
+    
+  .table-responsive
+    %table.table.table-striped.table-condensed.sortable
+      %tr
+        %th No. 
+        %th Name 
+        %th.sorttable_nosort Numerological Count
+        %th Numerological Value
+      - i = 0 
+      - @all_names.each do |name|
+        %tr
+          %td
+            = i+=1 
+          %td
+            = name[0]
+          %td 
+            = name[1]
+          %td
+            %a{:href => "#"}
+              = name[2]
